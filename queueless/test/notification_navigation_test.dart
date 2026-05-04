@@ -121,7 +121,7 @@ Widget _wrapTestApp({
   );
 }
 
-NotificationModel _notification({
+NotificationModel _makeNotification({
   required String id,
   required String title,
   required String body,
@@ -143,7 +143,7 @@ NotificationModel _notification({
   );
 }
 
-Future<void> _pumpNavigation(WidgetTester tester, {Duration duration = const Duration(milliseconds: 450)}) async {
+Future<void> _pump(WidgetTester tester, {Duration duration = const Duration(milliseconds: 450)}) async {
   await tester.pump();
   await tester.pump(duration);
 }
@@ -151,45 +151,106 @@ Future<void> _pumpNavigation(WidgetTester tester, {Duration duration = const Dur
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('admin business notification opens admin shell businesses tab', (tester) async {
-    final authProvider = _FakeAuthProvider(
-      UserModel(id: 'admin1', name: 'Admin', email: 'admin@queueless.com', phone: '555', role: UserRole.admin),
+  group('Notification Center — Navigation Behaviour', () {
+
+    testWidgets(
+      'Tapping a business-pending notification navigates admin to the Businesses tab',
+      (tester) async {
+        final authProvider = _FakeAuthProvider(
+          UserModel(id: 'admin1', name: 'Admin', email: 'admin@queueless.com', phone: '555', role: UserRole.admin),
+        );
+        final businessProvider = _FakeBusinessProvider();
+        final notificationProvider = _FakeNotificationProvider([
+          _makeNotification(
+            id: 'notif-1',
+            title: 'New business awaiting approval',
+            body: 'A business is waiting for review.',
+            type: 'business_pending',
+            entityType: 'business',
+            entityId: 'b1',
+            metadata: {'businessId': 'b1'},
+          ),
+        ]);
+
+        await tester.pumpWidget(_wrapTestApp(
+          authProvider: authProvider,
+          notificationProvider: notificationProvider,
+          businessProvider: businessProvider,
+          child: const NotificationCenterScreen(),
+        ));
+        await _pump(tester);
+
+        await tester.tap(find.text('New business awaiting approval'));
+        await _pump(tester);
+
+        expect(find.text('Admin — Businesses'), findsOneWidget);
+        expect(find.text('All Businesses'), findsOneWidget);
+      },
     );
-    final businessProvider = _FakeBusinessProvider();
-    final notificationProvider = _FakeNotificationProvider([
-      _notification(
-        id: 'notif-1',
-        title: 'New business awaiting approval',
-        body: 'A business is waiting for review.',
-        type: 'business_pending',
-        entityType: 'business',
-        entityId: 'b1',
-        metadata: {'businessId': 'b1'},
-      ),
-    ]);
 
-    await tester.pumpWidget(_wrapTestApp(
-      authProvider: authProvider,
-      notificationProvider: notificationProvider,
-      businessProvider: businessProvider,
-      child: const NotificationCenterScreen(),
-    ));
-    await _pumpNavigation(tester);
+    testWidgets(
+      'Tapping a business-approved notification navigates owner to the Business Home screen',
+      (tester) async {
+        final authProvider = _FakeAuthProvider(
+          UserModel(id: 'owner1', name: 'Owner Person', email: 'owner@test.com', phone: 'OWNER-PHONE', role: UserRole.businessOwner),
+        );
+        final businessProvider = _FakeBusinessProvider()
+          ..registerBusiness(
+            BusinessModel(
+              id: 'b1',
+              ownerId: 'owner1',
+              name: 'Alpha Store',
+              description: 'Desc',
+              category: BusinessCategory.other,
+              serviceType: ServiceType.queue,
+              address: 'Address',
+              phone: 'BUSINESS-PHONE',
+              approvalStatus: 'approved',
+            ),
+          );
+        final notificationProvider = _FakeNotificationProvider([
+          _makeNotification(
+            id: 'notif-2',
+            title: 'Your business was approved',
+            body: 'The business is now visible to customers.',
+            type: 'business_approved',
+            entityType: 'business',
+            entityId: 'b1',
+            metadata: {'businessId': 'b1'},
+          ),
+        ]);
 
-    await tester.tap(find.text('New business awaiting approval'));
-    await _pumpNavigation(tester);
+        await tester.pumpWidget(_wrapTestApp(
+          authProvider: authProvider,
+          notificationProvider: notificationProvider,
+          businessProvider: businessProvider,
+          child: const NotificationCenterScreen(),
+        ));
+        await _pump(tester);
 
-    expect(find.text('Admin — Businesses'), findsOneWidget);
-    expect(find.text('All Businesses'), findsOneWidget);
+        await tester.tap(find.text('Your business was approved'));
+        await _pump(tester, duration: const Duration(milliseconds: 700));
+
+        expect(find.text('Alpha Store'), findsAtLeastNWidgets(1));
+        expect(find.byType(BottomNavigationBar), findsOneWidget);
+        expect(find.text('Settings'), findsAtLeastNWidgets(1));
+        expect(find.text('Business under review'), findsNothing);
+      },
+    );
+
   });
 
-  testWidgets('owner approval notification opens business shell with bottom navigation', (tester) async {
-    final authProvider = _FakeAuthProvider(
-      UserModel(id: 'owner1', name: 'Owner Person', email: 'owner@test.com', phone: 'OWNER-PHONE', role: UserRole.businessOwner),
-    );
-    final businessProvider = _FakeBusinessProvider()
-      ..registerBusiness(
-        BusinessModel(
+  group('Business Home Screen — State Transitions', () {
+
+    testWidgets(
+      'Under-review banner disappears when business approval status changes to approved',
+      (tester) async {
+        final authProvider = _FakeAuthProvider(
+          UserModel(id: 'owner1', name: 'Owner', email: 'owner@test.com', phone: '555', role: UserRole.businessOwner),
+        );
+        final businessProvider = _FakeBusinessProvider();
+        final notificationProvider = _FakeNotificationProvider(const []);
+        final pendingBusiness = BusinessModel(
           id: 'b1',
           ownerId: 'owner1',
           name: 'Alpha Store',
@@ -197,107 +258,66 @@ void main() {
           category: BusinessCategory.other,
           serviceType: ServiceType.queue,
           address: 'Address',
-          phone: 'BUSINESS-PHONE',
-          approvalStatus: 'approved',
-        ),
-      );
-    final notificationProvider = _FakeNotificationProvider([
-      _notification(
-        id: 'notif-2',
-        title: 'Your business was approved',
-        body: 'The business is now visible to customers.',
-        type: 'business_approved',
-        entityType: 'business',
-        entityId: 'b1',
-        metadata: {'businessId': 'b1'},
-      ),
-    ]);
+          phone: '222',
+          approvalStatus: 'pending',
+          isActive: false,
+        );
+        businessProvider.registerBusiness(pendingBusiness);
 
-    await tester.pumpWidget(_wrapTestApp(
-      authProvider: authProvider,
-      notificationProvider: notificationProvider,
-      businessProvider: businessProvider,
-      child: const NotificationCenterScreen(),
-    ));
-    await _pumpNavigation(tester);
+        await tester.pumpWidget(_wrapTestApp(
+          authProvider: authProvider,
+          notificationProvider: notificationProvider,
+          businessProvider: businessProvider,
+          child: const BusinessHomeScreen(),
+        ));
+        await _pump(tester);
 
-    await tester.tap(find.text('Your business was approved'));
-    await _pumpNavigation(tester, duration: const Duration(milliseconds: 700));
+        expect(find.text('Business under review'), findsOneWidget);
 
-    expect(find.text('Alpha Store'), findsAtLeastNWidgets(1));
-    expect(find.byType(BottomNavigationBar), findsOneWidget);
-    expect(find.text('Settings'), findsAtLeastNWidgets(1));
-    expect(find.text('Business under review'), findsNothing);
-  });
+        businessProvider.registerBusiness(
+          pendingBusiness.copyWith(approvalStatus: 'approved', isActive: true),
+        );
+        await _pump(tester);
 
-  testWidgets('business approval banner disappears without page switching', (tester) async {
-    final authProvider = _FakeAuthProvider(
-      UserModel(id: 'owner1', name: 'Owner', email: 'owner@test.com', phone: '555', role: UserRole.businessOwner),
+        expect(find.text('Business under review'), findsNothing);
+      },
     );
-    final businessProvider = _FakeBusinessProvider();
-    final notificationProvider = _FakeNotificationProvider(const []);
-    final pendingBusiness = BusinessModel(
-      id: 'b1',
-      ownerId: 'owner1',
-      name: 'Alpha Store',
-      description: 'Desc',
-      category: BusinessCategory.other,
-      serviceType: ServiceType.queue,
-      address: 'Address',
-      phone: '222',
-      approvalStatus: 'pending',
-      isActive: false,
+
+    testWidgets(
+      'Settings tab displays both owner contact and business phone number',
+      (tester) async {
+        final authProvider = _FakeAuthProvider(
+          UserModel(id: 'owner1', name: 'Owner Person', email: 'owner@test.com', phone: 'OWNER-PHONE', role: UserRole.businessOwner),
+        );
+        final businessProvider = _FakeBusinessProvider()
+          ..registerBusiness(
+            BusinessModel(
+              id: 'b1',
+              ownerId: 'owner1',
+              name: 'Alpha Store',
+              description: 'Desc',
+              category: BusinessCategory.other,
+              serviceType: ServiceType.queue,
+              address: 'Address',
+              phone: 'BUSINESS-PHONE',
+              approvalStatus: 'approved',
+            ),
+          );
+        final notificationProvider = _FakeNotificationProvider(const []);
+
+        await tester.pumpWidget(_wrapTestApp(
+          authProvider: authProvider,
+          notificationProvider: notificationProvider,
+          businessProvider: businessProvider,
+          child: const BusinessHomeScreen(initialTab: BusinessHomeTab.settings),
+        ));
+        await _pump(tester, duration: const Duration(milliseconds: 700));
+
+        expect(find.text('Owner Person'), findsOneWidget);
+        expect(find.text('OWNER-PHONE'), findsOneWidget);
+        expect(find.text('BUSINESS-PHONE'), findsOneWidget);
+      },
     );
-    businessProvider.registerBusiness(pendingBusiness);
 
-    await tester.pumpWidget(_wrapTestApp(
-      authProvider: authProvider,
-      notificationProvider: notificationProvider,
-      businessProvider: businessProvider,
-      child: const BusinessHomeScreen(),
-    ));
-    await _pumpNavigation(tester);
-
-    expect(find.text('Business under review'), findsOneWidget);
-
-    businessProvider.registerBusiness(
-      pendingBusiness.copyWith(approvalStatus: 'approved', isActive: true),
-    );
-    await _pumpNavigation(tester);
-
-    expect(find.text('Business under review'), findsNothing);
-  });
-
-  testWidgets('business settings include owner and business phone fields', (tester) async {
-    final authProvider = _FakeAuthProvider(
-      UserModel(id: 'owner1', name: 'Owner Person', email: 'owner@test.com', phone: 'OWNER-PHONE', role: UserRole.businessOwner),
-    );
-    final businessProvider = _FakeBusinessProvider()
-      ..registerBusiness(
-        BusinessModel(
-          id: 'b1',
-          ownerId: 'owner1',
-          name: 'Alpha Store',
-          description: 'Desc',
-          category: BusinessCategory.other,
-          serviceType: ServiceType.queue,
-          address: 'Address',
-          phone: 'BUSINESS-PHONE',
-          approvalStatus: 'approved',
-        ),
-      );
-    final notificationProvider = _FakeNotificationProvider(const []);
-
-    await tester.pumpWidget(_wrapTestApp(
-      authProvider: authProvider,
-      notificationProvider: notificationProvider,
-      businessProvider: businessProvider,
-      child: const BusinessHomeScreen(initialTab: BusinessHomeTab.settings),
-    ));
-    await _pumpNavigation(tester, duration: const Duration(milliseconds: 700));
-
-    expect(find.text('Owner Person'), findsOneWidget);
-    expect(find.text('OWNER-PHONE'), findsOneWidget);
-    expect(find.text('BUSINESS-PHONE'), findsOneWidget);
   });
 }
