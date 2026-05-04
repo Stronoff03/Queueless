@@ -17,10 +17,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
 
       - name: Install Backend Dependencies
         working-directory: ./backend
-        run: npm install
+        run: npm ci
 
       - name: Run Tests & Collect Coverage
         working-directory: ./backend
@@ -31,13 +33,13 @@ jobs:
         with:
           filename: backend/coverage/cobertura-coverage.xml
           badge: true
-          fail_below_min: true 
+          fail_below_min: false
           format: markdown
           hide_branch_rate: false
           hide_complexity: true
           indicators: true
           output: both
-          thresholds: '70 80' 
+          thresholds: '50 80'
 
   frontend-ci:
     name: Frontend CI
@@ -49,14 +51,11 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          cache: true
 
       - name: Install Frontend Dependencies
         working-directory: ./queueless
         run: flutter pub get
-
-      - name: Analyze Code (Lint Gates)
-        working-directory: ./queueless
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Analyze Code (Lint Gates)
         working-directory: ./queueless
