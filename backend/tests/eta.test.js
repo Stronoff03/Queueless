@@ -6,6 +6,7 @@ const {
   formatEtaRangeLabel,
 } = require('../utils/eta');
 
+// Pure unit tests — no DB or server dependencies
 describe('ETA Utility — Unit Tests', () => {
 
   describe('buildEtaConfig()', () => {
