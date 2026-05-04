@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Tests & Collect Coverage
         working-directory: ./backend
-        run: npx jest --coverage --testPathPattern=tests/ --forceExit
+        run: npx jest tests/ --coverage --forceExit
 
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.3.0
