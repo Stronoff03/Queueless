@@ -17,7 +17,7 @@ jest.mock('jsonwebtoken', () => ({
 
 describe('Queue Routes', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    jest.resetAllMocks();
   });
 
   describe('GET /api/queues/business/:businessId', () => {
@@ -36,10 +36,11 @@ describe('Queue Routes', () => {
   describe('POST /api/queues/:businessId/join-guest', () => {
     it('should allow guest to join queue', async () => {
       pool.query
-        .mockResolvedValueOnce([[{ id: 'q-1', is_paused: 0 }]]) // queue check
-        .mockResolvedValueOnce([[{ count: 5 }]]) // position check
-        .mockResolvedValueOnce([{}]) // insert entry
-        .mockResolvedValueOnce([[{ id: 'p-1', price: 10 }]]) // products check (if items provided)
+        .mockResolvedValueOnce([[{ is_active: 1, service_type: 'queue' }]]) // business check
+        .mockResolvedValueOnce([[{ is_paused: 0 }]]) // queue check
+        .mockResolvedValueOnce([[{ cnt: 5 }]]) // position check
+        .mockResolvedValueOnce([{ insertId: 10 }]) // insert entry
+        .mockResolvedValueOnce([[{ id: 'p-1', price: 10 }]]) // products check
         .mockResolvedValueOnce([{}]); // insert items
         
       const res = await request(app)

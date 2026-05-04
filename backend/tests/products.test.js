@@ -17,15 +17,15 @@ jest.mock('jsonwebtoken', () => ({
 
 describe('Product Routes', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    jest.resetAllMocks();
   });
 
-  describe('GET /api/products/business/:businessId', () => {
+  describe('GET /api/products?businessId=b-1', () => {
     it('should return products for a business', async () => {
       const mockProducts = [{ id: 'p-1', name: 'Product 1' }];
       pool.query.mockResolvedValueOnce([mockProducts]);
       
-      const res = await request(app).get('/api/products/business/b-1');
+      const res = await request(app).get('/api/products?businessId=b-1');
       expect(res.statusCode).toEqual(200);
       expect(res.body).toEqual(mockProducts);
     });
@@ -37,7 +37,8 @@ describe('Product Routes', () => {
       pool.query
         .mockResolvedValueOnce([[{ id: 'b-1' }]]) // ownership check
         .mockResolvedValueOnce([{}]) // insert
-        .mockResolvedValueOnce([[{ id: 'p-1', name: 'New' }]]); // fetch
+        .mockResolvedValueOnce([[{ id: 'p-1', name: 'New' }]]) // fetch in route
+        .mockResolvedValueOnce([[{ id: 'p-1', name: 'New' }]]); // fetch in emit
         
       const res = await request(app)
         .post('/api/products')
