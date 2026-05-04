@@ -68,9 +68,8 @@ describe('Guest Web Pages (server.js)', () => {
       .mockResolvedValueOnce([[]]); // queue state
       
     const res = await request(app).get('/join/b-1');
-    expect(res.statusCode).toEqual(200);
-    expect(res.text).toContain('<!DOCTYPE html>');
-    expect(res.text).toContain('Test');
+    expect(res.statusCode).toEqual(302);
+    expect(res.header.location).toMatch(/\/q\/b-1|\/a\/b-1/);
   });
 
   it('should return 404 HTML if business not found', async () => {
@@ -78,5 +77,29 @@ describe('Guest Web Pages (server.js)', () => {
     const res = await request(app).get('/join/b-1');
     expect(res.statusCode).toEqual(404);
     expect(res.text).toContain('Business not found');
+  });
+
+  it('should return 200 for queue page /q/:id', async () => {
+    pool.query
+      .mockResolvedValueOnce([[{ name: 'Test', address: '' }]]) // biz
+      .mockResolvedValueOnce([[{ cnt: 5 }]]) // waitCount
+      .mockResolvedValueOnce([[{ is_paused: 0 }]]) // qRow
+      .mockResolvedValueOnce([[{ id: 'p-1', name: 'Product', description: 'Desc', price: 10, stock: 5 }]]); // products
+      
+    const res = await request(app).get('/q/b-1');
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toContain('Test');
+    expect(res.text).toContain('Product');
+  });
+
+  it('should return 200 for appointment page /a/:id', async () => {
+    pool.query
+      .mockResolvedValueOnce([[{ name: 'Test', address: '' }]]) // biz
+      .mockResolvedValueOnce([[{ id: 's-1', name: 'Service', description: 'Desc', price: 50 }]]); // services
+      
+    const res = await request(app).get('/a/b-1');
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toContain('Test');
+    expect(res.text).toContain('Service');
   });
 });
