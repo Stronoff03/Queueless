@@ -57,21 +57,21 @@ class _QueueCardState extends State<QueueCard>
             borderRadius: BorderRadius.circular(22),
             border: Border.all(
               color: isServing
-                  ? AppColors.secondary.withOpacity(0.3 + 0.2 * _pulseController.value)
+                  ? AppColors.secondary.withValues(alpha: 0.3 + 0.2 * _pulseController.value)
                   : AppColors.glassBorder,
               width: isServing ? 1.5 : 0.5,
             ),
             boxShadow: isServing
                 ? [
                     BoxShadow(
-                      color: AppColors.secondary.withOpacity(0.08 + 0.08 * _pulseController.value),
+                      color: AppColors.secondary.withValues(alpha: 0.08 + 0.08 * _pulseController.value),
                       blurRadius: 20,
                       offset: const Offset(0, 4),
                     ),
                   ]
                 : [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.12),
+                      color: Colors.black.withValues(alpha: 0.12),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -95,7 +95,7 @@ class _QueueCardState extends State<QueueCard>
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: statusColor.withOpacity(0.25),
+                    color: statusColor.withValues(alpha: 0.25),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -134,8 +134,8 @@ class _QueueCardState extends State<QueueCard>
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                AppColors.vip.withOpacity(0.2),
-                                AppColors.vip.withOpacity(0.08),
+                                AppColors.vip.withValues(alpha: 0.2),
+                                AppColors.vip.withValues(alpha: 0.08),
                               ],
                             ),
                             borderRadius: BorderRadius.circular(8),
@@ -156,7 +156,7 @@ class _QueueCardState extends State<QueueCard>
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: statusColor.withOpacity(0.08),
+                      color: statusColor.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
@@ -235,7 +235,7 @@ class _QueueCardState extends State<QueueCard>
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: statusColor.withOpacity(0.3)),
+                  border: Border.all(color: statusColor.withValues(alpha: 0.3)),
                 ),
                 child: Material(
                   color: Colors.transparent,

@@ -155,8 +155,8 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                         shape: BoxShape.circle,
                         gradient: RadialGradient(
                           colors: [
-                            AppColors.primary.withOpacity(0.2),
-                            AppColors.primary.withOpacity(0.0),
+                            AppColors.primary.withValues(alpha: 0.2),
+                            AppColors.primary.withValues(alpha: 0.0),
                           ],
                         ),
                       ),
@@ -185,8 +185,8 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                         shape: BoxShape.circle,
                         gradient: RadialGradient(
                           colors: [
-                            AppColors.secondary.withOpacity(0.12),
-                            AppColors.secondary.withOpacity(0.0),
+                            AppColors.secondary.withValues(alpha: 0.12),
+                            AppColors.secondary.withValues(alpha: 0.0),
                           ],
                         ),
                       ),
@@ -216,8 +216,8 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                         shape: BoxShape.circle,
                         gradient: RadialGradient(
                           colors: [
-                            AppColors.accent.withOpacity(0.08),
-                            AppColors.accent.withOpacity(0.0),
+                            AppColors.accent.withValues(alpha: 0.08),
+                            AppColors.accent.withValues(alpha: 0.0),
                           ],
                         ),
                       ),
@@ -275,7 +275,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                             onPressed: () {},
                             child: Text(
                               AppStrings.forgotPassword,
-                              style: TextStyle(color: AppColors.primaryLight.withOpacity(0.7), fontSize: 13),
+                              style: TextStyle(color: AppColors.primaryLight.withValues(alpha: 0.7), fontSize: 13),
                             ),
                           ),
                         )),
@@ -297,7 +297,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                     Container(
                                       padding: const EdgeInsets.all(4),
                                       decoration: BoxDecoration(
-                                        color: AppColors.primary.withOpacity(0.1),
+                                        color: AppColors.primary.withValues(alpha: 0.1),
                                         borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Icon(Icons.science_outlined, size: 14, color: AppColors.primaryLight),
@@ -435,9 +435,9 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                       margin: const EdgeInsets.only(bottom: 12),
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                       decoration: BoxDecoration(
-                        color: AppColors.error.withOpacity(0.12),
+                        color: AppColors.error.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: AppColors.error.withOpacity(0.25)),
+                        border: Border.all(color: AppColors.error.withValues(alpha: 0.25)),
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -468,7 +468,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.35),
+                    color: AppColors.primary.withValues(alpha: 0.35),
                     blurRadius: 24,
                     offset: const Offset(0, 8),
                   ),
@@ -570,10 +570,10 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
       decoration: BoxDecoration(
         gradient: AppColors.glassGradient,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.glassBorder.withOpacity(0.4), width: 0.5),
+        border: Border.all(color: AppColors.glassBorder.withValues(alpha: 0.4), width: 0.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -618,7 +618,7 @@ class _ParticlePainter extends CustomPainter {
       final x = p.x + 0.02 * math.sin(animValue * 2 * math.pi + p.y * 6);
 
       final paint = Paint()
-        ..color = AppColors.primaryLight.withOpacity(p.opacity * 0.5)
+        ..color = AppColors.primaryLight.withValues(alpha: p.opacity * 0.5)
         ..style = PaintingStyle.fill;
 
       canvas.drawCircle(

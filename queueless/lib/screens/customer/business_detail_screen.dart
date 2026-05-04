@@ -210,7 +210,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
           onTap: () => Navigator.pop(context),
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.background.withOpacity(0.6),
+              color: AppColors.background.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: AppColors.glassBorder, width: 0.5),
             ),
@@ -343,9 +343,9 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.08),
+                      color: AppColors.primary.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.primary.withOpacity(0.2)),
+                      border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
                     ),
                     child: Text(
                       biz.categoryDisplayName,
@@ -357,7 +357,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [AppColors.vip.withOpacity(0.12), AppColors.vip.withOpacity(0.04)],
+                        colors: [AppColors.vip.withValues(alpha: 0.12), AppColors.vip.withValues(alpha: 0.04)],
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -370,7 +370,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
                           } else if (biz.rating >= starValue - 0.5) {
                             return const Icon(Icons.star_half_rounded, color: AppColors.vip, size: 16);
                           } else {
-                            return Icon(Icons.star_outline_rounded, color: AppColors.vip.withOpacity(0.3), size: 16);
+                            return Icon(Icons.star_outline_rounded, color: AppColors.vip.withValues(alpha: 0.3), size: 16);
                           }
                         }),
                         const SizedBox(width: 6),
@@ -644,7 +644,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [AppColors.secondary.withOpacity(0.12), AppColors.secondary.withOpacity(0.04)],
+              colors: [AppColors.secondary.withValues(alpha: 0.12), AppColors.secondary.withValues(alpha: 0.04)],
             ),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -1231,7 +1231,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
                Center(
                 child: Container(
                   width: 40, height: 4,
-                  decoration: BoxDecoration(color: AppColors.textHint.withOpacity(0.2), borderRadius: BorderRadius.circular(2)),
+                  decoration: BoxDecoration(color: AppColors.textHint.withValues(alpha: 0.2), borderRadius: BorderRadius.circular(2)),
                 ),
               ),
               const SizedBox(height: 24),
@@ -1252,7 +1252,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.15),
+                        color: AppColors.primary.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Icon(Icons.design_services_rounded, color: AppColors.primary, size: 24),
@@ -1293,7 +1293,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
                         gradient: AppColors.primaryGradient,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
-                          BoxShadow(color: AppColors.primary.withOpacity(0.3), blurRadius: 12, offset: const Offset(0, 4)),
+                          BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 12, offset: const Offset(0, 4)),
                         ],
                       ),
                       child: ElevatedButton(

@@ -42,15 +42,15 @@ class _BusinessCardState extends State<BusinessCard>
             borderRadius: BorderRadius.circular(22),
             border: Border.all(
               color: _isPressed
-                  ? CategoryThemes.getTheme(widget.business.category).primaryColor.withOpacity(0.4)
+                  ? CategoryThemes.getTheme(widget.business.category).primaryColor.withValues(alpha: 0.4)
                   : AppColors.glassBorder,
               width: _isPressed ? 1.0 : 0.5,
             ),
             boxShadow: [
               BoxShadow(
                 color: _isPressed
-                    ? CategoryThemes.getTheme(widget.business.category).primaryColor.withOpacity(0.12)
-                    : Colors.black.withOpacity(0.15),
+                    ? CategoryThemes.getTheme(widget.business.category).primaryColor.withValues(alpha: 0.12)
+                    : Colors.black.withValues(alpha: 0.15),
                 blurRadius: _isPressed ? 20 : 12,
                 offset: const Offset(0, 4),
               ),
@@ -72,8 +72,8 @@ class _BusinessCardState extends State<BusinessCard>
                       shape: BoxShape.circle,
                       gradient: RadialGradient(
                         colors: [
-                          CategoryThemes.getTheme(widget.business.category).primaryColor.withOpacity(0.15),
-                          CategoryThemes.getTheme(widget.business.category).primaryColor.withOpacity(0.0),
+                          CategoryThemes.getTheme(widget.business.category).primaryColor.withValues(alpha: 0.15),
+                          CategoryThemes.getTheme(widget.business.category).primaryColor.withValues(alpha: 0.0),
                         ],
                       ),
                     ),
@@ -91,15 +91,15 @@ class _BusinessCardState extends State<BusinessCard>
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              CategoryThemes.getTheme(widget.business.category).primaryColor.withOpacity(0.2),
-                              CategoryThemes.getTheme(widget.business.category).accentColor.withOpacity(0.08),
+                              CategoryThemes.getTheme(widget.business.category).primaryColor.withValues(alpha: 0.2),
+                              CategoryThemes.getTheme(widget.business.category).accentColor.withValues(alpha: 0.08),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
                           borderRadius: BorderRadius.circular(18),
                           border: Border.all(
-                            color: CategoryThemes.getTheme(widget.business.category).primaryColor.withOpacity(0.3),
+                            color: CategoryThemes.getTheme(widget.business.category).primaryColor.withValues(alpha: 0.3),
                             width: 0.5,
                           ),
                         ),
@@ -156,7 +156,7 @@ class _BusinessCardState extends State<BusinessCard>
                               children: [
                                 Icon(Icons.location_on_outlined,
                                     size: 13,
-                                    color: AppColors.textHint.withOpacity(0.7)),
+                                    color: AppColors.textHint.withValues(alpha: 0.7)),
                                 const SizedBox(width: 4),
                                 Expanded(
                                   child: Text(
@@ -193,8 +193,8 @@ class _BusinessCardState extends State<BusinessCard>
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.vip.withOpacity(0.18),
-            AppColors.vip.withOpacity(0.08),
+            AppColors.vip.withValues(alpha: 0.18),
+            AppColors.vip.withValues(alpha: 0.08),
           ],
         ),
         borderRadius: BorderRadius.circular(10),
@@ -221,7 +221,7 @@ class _BusinessCardState extends State<BusinessCard>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.secondary.withOpacity(0.12),
+        color: AppColors.secondary.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
@@ -250,7 +250,7 @@ class _BusinessCardState extends State<BusinessCard>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.10),
+        color: color.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

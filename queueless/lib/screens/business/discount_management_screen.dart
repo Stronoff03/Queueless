@@ -302,7 +302,7 @@ class _DiscountManagementScreenState extends State<DiscountManagementScreen> {
         color: AppColors.surfaceLight,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: effectivelyActive ? AppColors.primary.withOpacity(0.2) : AppColors.glassBorder,
+          color: effectivelyActive ? AppColors.primary.withValues(alpha: 0.2) : AppColors.glassBorder,
           width: 0.5,
         ),
       ),
@@ -317,8 +317,8 @@ class _DiscountManagementScreenState extends State<DiscountManagementScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: effectivelyActive
-                        ? AppColors.primary.withOpacity(0.15)
-                        : AppColors.textHint.withOpacity(0.1),
+                        ? AppColors.primary.withValues(alpha: 0.15)
+                        : AppColors.textHint.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -409,7 +409,7 @@ class _DiscountManagementScreenState extends State<DiscountManagementScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.08),
+        color: color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

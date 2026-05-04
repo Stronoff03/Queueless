@@ -31,7 +31,7 @@ class AppointmentCard extends StatelessWidget {
         border: Border.all(color: AppColors.glassBorder, width: 0.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -47,7 +47,7 @@ class AppointmentCard extends StatelessWidget {
               height: 120,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [statusColor, statusColor.withOpacity(0.3)],
+                  colors: [statusColor, statusColor.withValues(alpha: 0.3)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -120,7 +120,7 @@ class AppointmentCard extends StatelessWidget {
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          Icon(Icons.notes_rounded, size: 14, color: AppColors.textHint.withOpacity(0.6)),
+                          Icon(Icons.notes_rounded, size: 14, color: AppColors.textHint.withValues(alpha: 0.6)),
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
@@ -194,7 +194,7 @@ class AppointmentCard extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: AppColors.error.withOpacity(0.3)),
+                                border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
                               ),
                               child: Material(
                                 color: Colors.transparent,
@@ -226,7 +226,7 @@ class AppointmentCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.secondary.withOpacity(0.2),
+                                    color: AppColors.secondary.withValues(alpha: 0.2),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),
@@ -274,7 +274,7 @@ class AppointmentCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.10),
+        color: color.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(

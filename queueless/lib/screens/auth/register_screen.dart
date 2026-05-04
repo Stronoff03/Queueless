@@ -158,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                         gradient: RadialGradient(
                           colors: [
                             (_selectedRole == UserRole.customer
-                                ? AppColors.primary : AppColors.secondary).withOpacity(0.15),
+                                ? AppColors.primary : AppColors.secondary).withValues(alpha: 0.15),
                             Colors.transparent,
                           ],
                         ),
@@ -212,8 +212,8 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: _selectedRole == UserRole.customer
-                                ? [AppColors.primary.withOpacity(0.15), AppColors.primary.withOpacity(0.05)]
-                                : [AppColors.secondary.withOpacity(0.15), AppColors.secondary.withOpacity(0.05)],
+                                ? [AppColors.primary.withValues(alpha: 0.15), AppColors.primary.withValues(alpha: 0.05)]
+                                : [AppColors.secondary.withValues(alpha: 0.15), AppColors.secondary.withValues(alpha: 0.05)],
                           ),
                           borderRadius: BorderRadius.circular(14),
                         ),
@@ -258,7 +258,7 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
   Widget _buildSectionHeader(String title, IconData icon, Color color) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: color.withOpacity(0.7)),
+        Icon(icon, size: 16, color: color.withValues(alpha: 0.7)),
         const SizedBox(width: 8),
         Text(
           title,
@@ -266,7 +266,7 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
             fontWeight: FontWeight.w800,
             fontSize: 11,
             letterSpacing: 1.1,
-            color: Colors.white.withOpacity(0.5),
+            color: Colors.white.withValues(alpha: 0.5),
           ),
         ),
       ],
@@ -424,7 +424,7 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
                   boxShadow: [
                     BoxShadow(
                       color: (_selectedRole == UserRole.customer
-                          ? AppColors.primary : AppColors.secondary).withOpacity(0.3),
+                          ? AppColors.primary : AppColors.secondary).withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 8),
                     ),
@@ -478,14 +478,14 @@ class _RegisterScreenState extends State<RegisterScreen> with TickerProviderStat
       decoration: BoxDecoration(
         gradient: AppColors.glassGradient,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.glassBorder.withOpacity(0.4), width: 0.5),
+        border: Border.all(color: AppColors.glassBorder.withValues(alpha: 0.4), width: 0.5),
       ),
       child: child,
     );
   }
 
   Widget _buildDivider() {
-    return Divider(color: AppColors.glassBorder.withOpacity(0.2), height: 1);
+    return Divider(color: AppColors.glassBorder.withValues(alpha: 0.2), height: 1);
   }
 
   Widget _buildInputField({

@@ -83,7 +83,6 @@ class _AnimationPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Offset.zero & size;
     final paint = Paint()..isAntiAlias = true;
 
     switch (theme.animationStyle) {
@@ -106,7 +105,6 @@ class _AnimationPainter extends CustomPainter {
         _drawPulse(canvas, size, paint);
         break;
       case AppAnimationStyle.particles:
-      default:
         _drawParticles(canvas, size, paint);
         break;
     }
@@ -114,7 +112,7 @@ class _AnimationPainter extends CustomPainter {
 
   void _drawParticles(Canvas canvas, Size size, Paint paint) {
     final random = math.Random(42); // fixed seed for performance
-    paint.color = theme.primaryColor.withOpacity(0.15);
+    paint.color = theme.primaryColor.withValues(alpha: 0.15);
 
     for (int i = 0; i < 20; i++) {
       final xOffset = math.sin(progress * 2 * math.pi + random.nextDouble() * 2 * math.pi) * 30;
@@ -129,7 +127,7 @@ class _AnimationPainter extends CustomPainter {
   }
 
   void _drawWaves(Canvas canvas, Size size, Paint paint) {
-    paint.color = theme.primaryColor.withOpacity(0.1);
+    paint.color = theme.primaryColor.withValues(alpha: 0.1);
     paint.style = PaintingStyle.fill;
     
     final path = Path();
@@ -144,7 +142,7 @@ class _AnimationPainter extends CustomPainter {
     path.close();
     canvas.drawPath(path, paint);
 
-    paint.color = theme.accentColor.withOpacity(0.08);
+    paint.color = theme.accentColor.withValues(alpha: 0.08);
     final path2 = Path();
     path2.moveTo(0, size.height);
     for (double i = 0; i <= size.width; i++) {
@@ -158,7 +156,7 @@ class _AnimationPainter extends CustomPainter {
   }
 
   void _drawGeometric(Canvas canvas, Size size, Paint paint) {
-    paint.color = theme.primaryColor.withOpacity(0.06);
+    paint.color = theme.primaryColor.withValues(alpha: 0.06);
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 2;
 
@@ -176,7 +174,7 @@ class _AnimationPainter extends CustomPainter {
   void _drawSmoke(Canvas canvas, Size size, Paint paint) {
     final random = math.Random(123);
     for (int i = 0; i < 5; i++) {
-      paint.color = theme.primaryColor.withOpacity(0.05 + random.nextDouble() * 0.05);
+      paint.color = theme.primaryColor.withValues(alpha: 0.05 + random.nextDouble() * 0.05);
       
       final centerX = size.width * (0.2 + random.nextDouble() * 0.6);
       final phase = progress * 2 * math.pi + random.nextDouble();
@@ -195,7 +193,7 @@ class _AnimationPainter extends CustomPainter {
     final random = math.Random(7); 
     
     for (int i = 0; i < 15; i++) {
-      paint.color = theme.primaryColor.withOpacity(0.1 + random.nextDouble() * 0.2);
+      paint.color = theme.primaryColor.withValues(alpha: 0.1 + random.nextDouble() * 0.2);
       final x = random.nextDouble() * size.width + math.sin(progress * 4 * math.pi + i) * 10;
       final y = size.height + 20 - ((progress * 1.2 + random.nextDouble()) % 1.0) * (size.height + 40);
       final radius = random.nextDouble() * 8 + 4;
@@ -208,7 +206,7 @@ class _AnimationPainter extends CustomPainter {
     paint.style = PaintingStyle.fill;
     
     for (int i = 0; i < 25; i++) {
-      paint.color = (i % 2 == 0 ? theme.primaryColor : theme.accentColor).withOpacity(0.2);
+      paint.color = (i % 2 == 0 ? theme.primaryColor : theme.accentColor).withValues(alpha: 0.2);
       
       final angle = progress * 4 * math.pi + random.nextDouble() * math.pi;
       final x = (random.nextDouble() * size.width + math.sin(progress * 2 * math.pi) * 20) % size.width;
@@ -228,7 +226,7 @@ class _AnimationPainter extends CustomPainter {
     
     for(int i = 0; i < 3; i++) {
        double p = (progress + (i * 0.33)) % 1.0;
-       paint.color = theme.primaryColor.withOpacity((1.0 - p) * 0.15);
+       paint.color = theme.primaryColor.withValues(alpha: (1.0 - p) * 0.15);
        canvas.drawCircle(center, p * size.width, paint);
     }
   }

@@ -1,0 +1,309 @@
+﻿2026-05-04T20:29:24.4164631Z Current runner version: '2.334.0'
+2026-05-04T20:29:24.4190488Z ##[group]Runner Image Provisioner
+2026-05-04T20:29:24.4191334Z Hosted Compute Agent
+2026-05-04T20:29:24.4192109Z Version: 20260213.493
+2026-05-04T20:29:24.4192753Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+2026-05-04T20:29:24.4193503Z Build Date: 2026-02-13T00:28:41Z
+2026-05-04T20:29:24.4194175Z Worker ID: {39c68e44-298b-4069-b482-d674e340f719}
+2026-05-04T20:29:24.4195006Z Azure Region: northcentralus
+2026-05-04T20:29:24.4195607Z ##[endgroup]
+2026-05-04T20:29:24.4197155Z ##[group]Operating System
+2026-05-04T20:29:24.4197920Z Ubuntu
+2026-05-04T20:29:24.4198401Z 24.04.4
+2026-05-04T20:29:24.4199187Z LTS
+2026-05-04T20:29:24.4199837Z ##[endgroup]
+2026-05-04T20:29:24.4200397Z ##[group]Runner Image
+2026-05-04T20:29:24.4200978Z Image: ubuntu-24.04
+2026-05-04T20:29:24.4201611Z Version: 20260413.86.1
+2026-05-04T20:29:24.4202832Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260413.86/images/ubuntu/Ubuntu2404-Readme.md
+2026-05-04T20:29:24.4204434Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260413.86
+2026-05-04T20:29:24.4205403Z ##[endgroup]
+2026-05-04T20:29:24.4206605Z ##[group]GITHUB_TOKEN Permissions
+2026-05-04T20:29:24.4208832Z Contents: read
+2026-05-04T20:29:24.4209625Z Metadata: read
+2026-05-04T20:29:24.4210255Z Packages: read
+2026-05-04T20:29:24.4210801Z ##[endgroup]
+2026-05-04T20:29:24.4212946Z Secret source: Actions
+2026-05-04T20:29:24.4214154Z Prepare workflow directory
+2026-05-04T20:29:24.4571039Z Prepare all required actions
+2026-05-04T20:29:24.4611026Z Getting action download info
+2026-05-04T20:29:24.8733983Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-05-04T20:29:24.9976183Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-05-04T20:29:25.0844518Z Download action repository 'irongut/CodeCoverageSummary@v1.3.0' (SHA:51cc3a756ddcd398d447c044c02cb6aa83fdae95)
+2026-05-04T20:29:25.4167916Z Complete job name: Backend CI & Coverage
+2026-05-04T20:29:25.4639641Z ##[group]Pull down action image 'ghcr.io/irongut/codecoveragesummary:v1.3.0'
+2026-05-04T20:29:25.4685700Z ##[command]/usr/bin/docker pull ghcr.io/irongut/codecoveragesummary:v1.3.0
+2026-05-04T20:29:25.9217358Z v1.3.0: Pulling from irongut/codecoveragesummary
+2026-05-04T20:29:25.9219514Z 461246efe0a7: Pulling fs layer
+2026-05-04T20:29:25.9220288Z 2b6a8a95a1cb: Pulling fs layer
+2026-05-04T20:29:25.9221473Z e6a21b009eab: Pulling fs layer
+2026-05-04T20:29:25.9223576Z 8cb016ebfcfd: Pulling fs layer
+2026-05-04T20:29:25.9224414Z 0bb6d273d261: Pulling fs layer
+2026-05-04T20:29:25.9225283Z d789d311e9d4: Pulling fs layer
+2026-05-04T20:29:25.9226058Z 8cb016ebfcfd: Waiting
+2026-05-04T20:29:25.9226706Z 0bb6d273d261: Waiting
+2026-05-04T20:29:25.9227340Z d789d311e9d4: Waiting
+2026-05-04T20:29:26.1261382Z 461246efe0a7: Verifying Checksum
+2026-05-04T20:29:26.1270222Z 461246efe0a7: Download complete
+2026-05-04T20:29:26.1333657Z e6a21b009eab: Verifying Checksum
+2026-05-04T20:29:26.1335639Z e6a21b009eab: Download complete
+2026-05-04T20:29:26.1473065Z 2b6a8a95a1cb: Verifying Checksum
+2026-05-04T20:29:26.1474181Z 2b6a8a95a1cb: Download complete
+2026-05-04T20:29:26.2587332Z 8cb016ebfcfd: Verifying Checksum
+2026-05-04T20:29:26.2589202Z 8cb016ebfcfd: Download complete
+2026-05-04T20:29:26.2610566Z d789d311e9d4: Download complete
+2026-05-04T20:29:26.2638319Z 0bb6d273d261: Download complete
+2026-05-04T20:29:27.5997975Z 461246efe0a7: Pull complete
+2026-05-04T20:29:29.6201443Z 2b6a8a95a1cb: Pull complete
+2026-05-04T20:29:30.0207909Z e6a21b009eab: Pull complete
+2026-05-04T20:29:30.0330339Z 8cb016ebfcfd: Pull complete
+2026-05-04T20:29:30.0439978Z 0bb6d273d261: Pull complete
+2026-05-04T20:29:30.0592762Z d789d311e9d4: Pull complete
+2026-05-04T20:29:30.0627976Z Digest: sha256:daebdede906ca84788b94378a1504a88d38621198d3836df24d60d6215e64a86
+2026-05-04T20:29:30.0644186Z Status: Downloaded newer image for ghcr.io/irongut/codecoveragesummary:v1.3.0
+2026-05-04T20:29:30.0658546Z ghcr.io/irongut/codecoveragesummary:v1.3.0
+2026-05-04T20:29:30.0676966Z ##[endgroup]
+2026-05-04T20:29:30.0968218Z ##[group]Run actions/checkout@v4
+2026-05-04T20:29:30.0968811Z with:
+2026-05-04T20:29:30.0969235Z   repository: Tuoduo/Queueless
+2026-05-04T20:29:30.0969695Z   token: ***
+2026-05-04T20:29:30.0969893Z   ssh-strict: true
+2026-05-04T20:29:30.0970090Z   ssh-user: git
+2026-05-04T20:29:30.0970295Z   persist-credentials: true
+2026-05-04T20:29:30.0970509Z   clean: true
+2026-05-04T20:29:30.0970700Z   sparse-checkout-cone-mode: true
+2026-05-04T20:29:30.0970946Z   fetch-depth: 1
+2026-05-04T20:29:30.0971131Z   fetch-tags: false
+2026-05-04T20:29:30.0971319Z   show-progress: true
+2026-05-04T20:29:30.0971514Z   lfs: false
+2026-05-04T20:29:30.0971678Z   submodules: false
+2026-05-04T20:29:30.0971876Z   set-safe-directory: true
+2026-05-04T20:29:30.0972345Z ##[endgroup]
+2026-05-04T20:29:30.2147805Z Syncing repository: Tuoduo/Queueless
+2026-05-04T20:29:30.2149639Z ##[group]Getting Git version info
+2026-05-04T20:29:30.2150127Z Working directory is '/home/runner/work/Queueless/Queueless'
+2026-05-04T20:29:30.2150764Z [command]/usr/bin/git version
+2026-05-04T20:29:30.2193453Z git version 2.53.0
+2026-05-04T20:29:30.2221381Z ##[endgroup]
+2026-05-04T20:29:30.2246230Z Temporarily overriding HOME='/home/runner/work/_temp/c39f3ebf-54e2-44a1-9df6-f8679a8ef253' before making global git config changes
+2026-05-04T20:29:30.2247683Z Adding repository directory to the temporary git global config as a safe directory
+2026-05-04T20:29:30.2253211Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Queueless/Queueless
+2026-05-04T20:29:30.2288106Z Deleting the contents of '/home/runner/work/Queueless/Queueless'
+2026-05-04T20:29:30.2292234Z ##[group]Initializing the repository
+2026-05-04T20:29:30.2296357Z [command]/usr/bin/git init /home/runner/work/Queueless/Queueless
+2026-05-04T20:29:30.2398365Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-05-04T20:29:30.2399829Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-05-04T20:29:30.2400737Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-05-04T20:29:30.2401238Z hint: call:
+2026-05-04T20:29:30.2401450Z hint:
+2026-05-04T20:29:30.2401778Z hint: 	git config --global init.defaultBranch <name>
+2026-05-04T20:29:30.2402120Z hint:
+2026-05-04T20:29:30.2402426Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-05-04T20:29:30.2402928Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-05-04T20:29:30.2403297Z hint:
+2026-05-04T20:29:30.2403479Z hint: 	git branch -m <name>
+2026-05-04T20:29:30.2403695Z hint:
+2026-05-04T20:29:30.2404001Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-05-04T20:29:30.2404542Z Initialized empty Git repository in /home/runner/work/Queueless/Queueless/.git/
+2026-05-04T20:29:30.2412369Z [command]/usr/bin/git remote add origin https://github.com/Tuoduo/Queueless
+2026-05-04T20:29:30.2443333Z ##[endgroup]
+2026-05-04T20:29:30.2443780Z ##[group]Disabling automatic garbage collection
+2026-05-04T20:29:30.2447741Z [command]/usr/bin/git config --local gc.auto 0
+2026-05-04T20:29:30.2475892Z ##[endgroup]
+2026-05-04T20:29:30.2476413Z ##[group]Setting up auth
+2026-05-04T20:29:30.2483655Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-05-04T20:29:30.2513863Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-05-04T20:29:30.2813996Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-05-04T20:29:30.2844258Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-05-04T20:29:30.3068253Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-05-04T20:29:30.3108045Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-05-04T20:29:30.3335275Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-05-04T20:29:30.3371090Z ##[endgroup]
+2026-05-04T20:29:30.3371669Z ##[group]Fetching the repository
+2026-05-04T20:29:30.3380277Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9320571c150f8c03d5e9f81ad95166d2e45d72dd:refs/remotes/origin/main
+2026-05-04T20:29:30.9429625Z From https://github.com/Tuoduo/Queueless
+2026-05-04T20:29:30.9430211Z  * [new ref]         9320571c150f8c03d5e9f81ad95166d2e45d72dd -> origin/main
+2026-05-04T20:29:30.9458664Z ##[endgroup]
+2026-05-04T20:29:30.9459510Z ##[group]Determining the checkout info
+2026-05-04T20:29:30.9461910Z ##[endgroup]
+2026-05-04T20:29:30.9466782Z [command]/usr/bin/git sparse-checkout disable
+2026-05-04T20:29:30.9503079Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-05-04T20:29:30.9529168Z ##[group]Checking out the ref
+2026-05-04T20:29:30.9533185Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-05-04T20:29:30.9988135Z Switched to a new branch 'main'
+2026-05-04T20:29:30.9989310Z branch 'main' set up to track 'origin/main'.
+2026-05-04T20:29:31.0003287Z ##[endgroup]
+2026-05-04T20:29:31.0048855Z [command]/usr/bin/git log -1 --format=%H
+2026-05-04T20:29:31.0072994Z 9320571c150f8c03d5e9f81ad95166d2e45d72dd
+2026-05-04T20:29:31.0315920Z ##[group]Run actions/setup-node@v4
+2026-05-04T20:29:31.0316195Z with:
+2026-05-04T20:29:31.0316365Z   node-version: 20
+2026-05-04T20:29:31.0316557Z   always-auth: false
+2026-05-04T20:29:31.0316749Z   check-latest: false
+2026-05-04T20:29:31.0317066Z   token: ***
+2026-05-04T20:29:31.0317242Z ##[endgroup]
+2026-05-04T20:29:31.2140305Z Found in cache @ /opt/hostedtoolcache/node/20.20.2/x64
+2026-05-04T20:29:31.2147711Z ##[group]Environment details
+2026-05-04T20:29:31.5225230Z node: v20.20.2
+2026-05-04T20:29:31.5227759Z npm: 10.8.2
+2026-05-04T20:29:31.5228066Z yarn: 1.22.22
+2026-05-04T20:29:31.5228753Z ##[endgroup]
+2026-05-04T20:29:31.5397480Z ##[group]Run npm install
+2026-05-04T20:29:31.5397806Z [36;1mnpm install[0m
+2026-05-04T20:29:31.5432090Z shell: /usr/bin/bash -e {0}
+2026-05-04T20:29:31.5432348Z ##[endgroup]
+2026-05-04T20:29:39.7552044Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-05-04T20:29:40.2292062Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-05-04T20:29:41.3763648Z 
+2026-05-04T20:29:41.3764583Z added 427 packages, and audited 428 packages in 10s
+2026-05-04T20:29:41.3765097Z 
+2026-05-04T20:29:41.3765310Z 60 packages are looking for funding
+2026-05-04T20:29:41.3765806Z   run `npm fund` for details
+2026-05-04T20:29:41.3786461Z 
+2026-05-04T20:29:41.3786913Z 1 moderate severity vulnerability
+2026-05-04T20:29:41.3787242Z 
+2026-05-04T20:29:41.3787594Z To address all issues (including breaking changes), run:
+2026-05-04T20:29:41.3787956Z   npm audit fix --force
+2026-05-04T20:29:41.3788101Z 
+2026-05-04T20:29:41.3788262Z Run `npm audit` for details.
+2026-05-04T20:29:41.4073482Z ##[group]Run npm run test
+2026-05-04T20:29:41.4073769Z [36;1mnpm run test[0m
+2026-05-04T20:29:41.4097046Z shell: /usr/bin/bash -e {0}
+2026-05-04T20:29:41.4097280Z ##[endgroup]
+2026-05-04T20:29:41.5247520Z 
+2026-05-04T20:29:41.5248446Z > queueless-backend@1.0.0 test
+2026-05-04T20:29:41.5249446Z > jest --coverage
+2026-05-04T20:29:41.5249989Z 
+2026-05-04T20:29:44.3587076Z PASS tests/health.test.js
+2026-05-04T20:29:44.3683756Z   ● Console
+2026-05-04T20:29:44.3684013Z 
+2026-05-04T20:29:44.3684194Z     console.log
+2026-05-04T20:29:44.3684711Z       [2026-05-04T20:29:44.267Z] GET /api/health
+2026-05-04T20:29:44.3685107Z 
+2026-05-04T20:29:44.3685337Z       at log (server.js:70:11)
+2026-05-04T20:29:44.3685622Z 
+2026-05-04T20:29:44.3730271Z PASS tests/auth.test.js
+2026-05-04T20:29:44.3796440Z   ● Console
+2026-05-04T20:29:44.3796862Z 
+2026-05-04T20:29:44.3797049Z     console.log
+2026-05-04T20:29:44.3797568Z       [2026-05-04T20:29:44.268Z] POST /api/auth/login
+2026-05-04T20:29:44.3798042Z 
+2026-05-04T20:29:44.3798301Z       at log (server.js:70:11)
+2026-05-04T20:29:44.3798593Z 
+2026-05-04T20:29:44.3798741Z     console.log
+2026-05-04T20:29:44.3799532Z       [2026-05-04T20:29:44.289Z] POST /api/auth/login
+2026-05-04T20:29:44.3799914Z 
+2026-05-04T20:29:44.3800130Z       at log (server.js:70:11)
+2026-05-04T20:29:44.3800411Z 
+2026-05-04T20:29:44.3800590Z     console.log
+2026-05-04T20:29:44.3801136Z       AUTH: Login Attempt: Email=test@test.com, PwdLength=8
+2026-05-04T20:29:44.3801587Z 
+2026-05-04T20:29:44.3801796Z       at log (routes/auth.js:31:13)
+2026-05-04T20:29:44.3802092Z 
+2026-05-04T20:29:44.3802230Z     console.log
+2026-05-04T20:29:44.3802646Z       AUTH: Login Fail: User not found in DB
+2026-05-04T20:29:44.3802995Z 
+2026-05-04T20:29:44.3803220Z       at log (routes/auth.js:34:15)
+2026-05-04T20:29:44.3803520Z 
+2026-05-04T20:29:44.3803736Z     console.log
+2026-05-04T20:29:44.3804210Z       [2026-05-04T20:29:44.296Z] POST /api/auth/login
+2026-05-04T20:29:44.3804580Z 
+2026-05-04T20:29:44.3804790Z       at log (server.js:70:11)
+2026-05-04T20:29:44.3805068Z 
+2026-05-04T20:29:44.3805211Z     console.log
+2026-05-04T20:29:44.3805720Z       AUTH: Login Attempt: Email=test@test.com, PwdLength=8
+2026-05-04T20:29:44.3806148Z 
+2026-05-04T20:29:44.3806348Z       at log (routes/auth.js:31:13)
+2026-05-04T20:29:44.3806634Z 
+2026-05-04T20:29:44.3806772Z     console.log
+2026-05-04T20:29:44.3807275Z       AUTH: User Found: ID=1, DB_PWD_HASH=hashedpassword
+2026-05-04T20:29:44.3807691Z 
+2026-05-04T20:29:44.3807903Z       at log (routes/auth.js:39:13)
+2026-05-04T20:29:44.3808197Z 
+2026-05-04T20:29:44.3808337Z     console.log
+2026-05-04T20:29:44.3808787Z       [2026-05-04T20:29:44.302Z] POST /api/auth/register
+2026-05-04T20:29:44.3809489Z 
+2026-05-04T20:29:44.3809683Z       at log (server.js:70:11)
+2026-05-04T20:29:44.3809965Z 
+2026-05-04T20:29:44.3810118Z     console.log
+2026-05-04T20:29:44.3810608Z       [2026-05-04T20:29:44.307Z] POST /api/auth/register
+2026-05-04T20:29:44.3811007Z 
+2026-05-04T20:29:44.3811230Z       at log (server.js:70:11)
+2026-05-04T20:29:44.3811518Z 
+2026-05-04T20:29:44.4387555Z ----------------------|---------|----------|---------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2026-05-04T20:29:44.4390986Z File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                                                                                                                                    
+2026-05-04T20:29:44.4393921Z ----------------------|---------|----------|---------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2026-05-04T20:29:44.4397159Z All files             |   15.13 |     2.21 |    2.35 |   16.53 |                                                                                                                                                                                      
+2026-05-04T20:29:44.4399684Z  backend              |   49.52 |     4.54 |   10.52 |      52 |                                                                                                                                                                                      
+2026-05-04T20:29:44.4402216Z   server.js           |   49.52 |     4.54 |   10.52 |      52 | 34-60,100-843,848-849,858-862,867-869                                                                                                                                                
+2026-05-04T20:29:44.4404500Z  backend/middleware   |   17.64 |        0 |       0 |      20 |                                                                                                                                                                                      
+2026-05-04T20:29:44.4406656Z   auth.js             |   17.64 |        0 |       0 |      20 | 5-24                                                                                                                                                                                 
+2026-05-04T20:29:44.4408787Z  backend/routes       |   13.54 |     2.27 |    1.73 |   14.74 |                                                                                                                                                                                      
+2026-05-04T20:29:44.4411683Z   admin.js            |    11.3 |        0 |       0 |   12.79 | 15-43,51-161,166-180,184-188,192-195,199-203,208-225,229-247,251-269,282-319,324-346,351-368,372-401,406-415,420-423,427-435,439-444,448-451,456-471,475-491,495-525,529-554,559-582 
+2026-05-04T20:29:44.4414202Z   analytics.js        |    6.18 |        0 |       0 |    6.31 | 8-93,99-342                                                                                                                                                                          
+2026-05-04T20:29:44.4416617Z   appointments.js     |    7.89 |        0 |       0 |    8.61 | 11-90,95-143,148-157,162-189,195-204,210-220,225-241,246-285,290-381,386-406,411-435                                                                                                 
+2026-05-04T20:29:44.4419365Z   auth.js             |   39.83 |    34.84 |   42.85 |   42.05 | 43-44,49-50,64,87-105,115,121-131,137-172,177-184,190-201                                                                                                                            
+2026-05-04T20:29:44.4421685Z   businesses.js       |   15.59 |        0 |       0 |   17.52 | 13-24,29-32,37-72,77-81,86-124,129-150,155-181,186-208,213-224                                                                                                                       
+2026-05-04T20:29:44.4423993Z   chats.js            |    9.92 |        0 |       0 |   10.56 | 11-128,132-193,198-237,242-249,254-317,322-342,347-364                                                                                                                               
+2026-05-04T20:29:44.4426300Z   discounts.js        |   15.78 |        0 |       0 |   18.18 | 9,20-29,34-59,64-73,78-106,112-121,126-132                                                                                                                                           
+2026-05-04T20:29:44.4427474Z   guest_pages.js      |   14.28 |        0 |       0 |    15.9 | 14-27,39-46,53-439,446-843                                                                                                                                                           
+2026-05-04T20:29:44.4428457Z   history.js          |   31.57 |        0 |       0 |   33.33 | 9-84                                                                                                                                                                                 
+2026-05-04T20:29:44.4430143Z   notifications.js    |   33.33 |        0 |       0 |   33.33 | 9-21,26-30,35-39,44-48,53-57                                                                                                                                                         
+2026-05-04T20:29:44.4431206Z   products.js         |   18.18 |        0 |       0 |    19.6 | 9-18,29-34,39-55,60-77,82-92                                                                                                                                                         
+2026-05-04T20:29:44.4432544Z   queues.js           |    6.86 |        0 |       0 |     7.6 | 13-199,204-217,222-228,233-239,244-286,291-365,370-439,444-456,460-492,499-592,597-628,633-681                                                                                       
+2026-05-04T20:29:44.4433638Z   tickets.js          |   20.33 |        0 |       0 |   22.22 | 22-42,47-79,84-90,95-108,113-142                                                                                                                                                     
+2026-05-04T20:29:44.4434595Z  backend/utils        |    3.88 |        0 |       0 |    4.59 |                                                                                                                                                                                      
+2026-05-04T20:29:44.4435547Z   business_updates.js |      20 |        0 |       0 |      25 | 2-13                                                                                                                                                                                 
+2026-05-04T20:29:44.4436465Z   eta.js              |       2 |        0 |       0 |    2.27 | 2-96                                                                                                                                                                                 
+2026-05-04T20:29:44.4437370Z   notifications.js    |    4.16 |        0 |       0 |    5.12 | 4-93                                                                                                                                                                                 
+2026-05-04T20:29:44.4438574Z ----------------------|---------|----------|---------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2026-05-04T20:29:44.4619801Z 
+2026-05-04T20:29:44.4624066Z Test Suites: 2 passed, 2 total
+2026-05-04T20:29:44.4624963Z Tests:       6 passed, 6 total
+2026-05-04T20:29:44.4625860Z Snapshots:   0 total
+2026-05-04T20:29:44.4626515Z Time:        2.551 s
+2026-05-04T20:29:44.4627080Z Ran all test suites.
+2026-05-04T20:29:44.4905982Z ##[group]Run irongut/CodeCoverageSummary@v1.3.0
+2026-05-04T20:29:44.4906302Z with:
+2026-05-04T20:29:44.4906535Z   filename: backend/coverage/cobertura-coverage.xml
+2026-05-04T20:29:44.4906816Z   badge: true
+2026-05-04T20:29:44.4906990Z   fail_below_min: true
+2026-05-04T20:29:44.4907175Z   format: markdown
+2026-05-04T20:29:44.4907360Z   hide_branch_rate: false
+2026-05-04T20:29:44.4907565Z   hide_complexity: true
+2026-05-04T20:29:44.4907764Z   indicators: true
+2026-05-04T20:29:44.4907943Z   output: both
+2026-05-04T20:29:44.4908118Z   thresholds: 70 80
+2026-05-04T20:29:44.4908303Z ##[endgroup]
+2026-05-04T20:29:44.5023004Z ##[command]/usr/bin/docker run --name ghcrioirongutcodecoveragesummaryv130_0758f7 --label 13bb9d --workdir /github/workspace --rm -e "INPUT_FILENAME" -e "INPUT_BADGE" -e "INPUT_FAIL_BELOW_MIN" -e "INPUT_FORMAT" -e "INPUT_HIDE_BRANCH_RATE" -e "INPUT_HIDE_COMPLEXITY" -e "INPUT_INDICATORS" -e "INPUT_OUTPUT" -e "INPUT_THRESHOLDS" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e "ACTIONS_ORCHESTRATION_ID" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp":"/github/runner_temp" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/Queueless/Queueless":"/github/workspace" ghcr.io/irongut/codecoveragesummary:v1.3.0  "--files" "backend/coverage/cobertura-coverage.xml" "--badge" "true" "--fail" "true" "--format" "markdown" "--hidebranch" "false" "--hidecomplexity" "true" "--indicators" "true" "--output" "both" "--thresholds" "70 80"
+2026-05-04T20:29:45.0262871Z Coverage File: /github/workspace/backend/coverage/cobertura-coverage.xml
+2026-05-04T20:29:45.0513114Z 
+2026-05-04T20:29:45.0514558Z ![Code Coverage](https://img.shields.io/badge/Code%20Coverage-17%25-critical?style=flat)
+2026-05-04T20:29:45.0515244Z 
+2026-05-04T20:29:45.0515538Z Package | Line Rate | Branch Rate | Health
+2026-05-04T20:29:45.0516199Z -------- | --------- | ----------- | ------
+2026-05-04T20:29:45.0516919Z backend | 52% | 5% | ❌
+2026-05-04T20:29:45.0517847Z backend.middleware | 20% | 0% | ❌
+2026-05-04T20:29:45.0518424Z backend.routes | 15% | 2% | ❌
+2026-05-04T20:29:45.0519345Z backend.utils | 5% | 0% | ❌
+2026-05-04T20:29:45.0520366Z **Summary** | **17%** (270 / 1633) | **2%** (26 / 1174) | ❌
+2026-05-04T20:29:45.0520758Z 
+2026-05-04T20:29:45.0521007Z _Minimum allowed line rate is `70%`_
+2026-05-04T20:29:45.0521316Z 
+2026-05-04T20:29:45.0521857Z FAIL: Overall line rate below minimum threshold of 70%.
+2026-05-04T20:29:45.1354583Z Post job cleanup.
+2026-05-04T20:29:45.2372590Z [command]/usr/bin/git version
+2026-05-04T20:29:45.2410066Z git version 2.53.0
+2026-05-04T20:29:45.2456441Z Temporarily overriding HOME='/home/runner/work/_temp/61dd9fde-6307-49fa-9ff9-5b7ad0b827c6' before making global git config changes
+2026-05-04T20:29:45.2458020Z Adding repository directory to the temporary git global config as a safe directory
+2026-05-04T20:29:45.2463474Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Queueless/Queueless
+2026-05-04T20:29:45.2500355Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-05-04T20:29:45.2533241Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-05-04T20:29:45.2757546Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-05-04T20:29:45.2779335Z http.https://github.com/.extraheader
+2026-05-04T20:29:45.2792176Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-05-04T20:29:45.2823188Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-05-04T20:29:45.3053262Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-05-04T20:29:45.3085928Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-05-04T20:29:45.3437143Z Cleaning up orphan processes
+2026-05-04T20:29:45.3817849Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup-node@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
