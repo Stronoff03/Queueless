@@ -57,6 +57,9 @@ jobs:
       - name: Analyze Code (Lint Gates)
         working-directory: ./queueless
         run: flutter analyze
+      - name: Analyze Code (Lint Gates)
+        working-directory: ./queueless
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Run Flutter Tests
         working-directory: ./queueless
