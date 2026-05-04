@@ -17,7 +17,7 @@ jest.mock('jsonwebtoken', () => ({
 
 describe('Business Routes', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    jest.resetAllMocks();
   });
 
   describe('GET /api/businesses', () => {
