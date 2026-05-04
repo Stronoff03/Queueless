@@ -13,27 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          dotnet-version: '8.0.x'
+          node-version: '20'
 
       - name: Install Backend Dependencies
         working-directory: ./backend
-        run: dotnet restore
-
-      - name: Build Backend
-        working-directory: ./backend
-        run: dotnet build --no-restore
+        run: npm install
 
       - name: Run Tests & Collect Coverage
         working-directory: ./backend
-        run: dotnet test --no-build --collect:"XPlat Code Coverage" --results-directory ./coverage
+        run: npm run test
 
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: backend/coverage/**/coverage.cobertura.xml
+          filename: backend/coverage/cobertura-coverage.xml
           badge: true
           fail_below_min: true 
           format: markdown
@@ -59,10 +55,9 @@ jobs:
         run: flutter pub get
 
       - name: Analyze Code (Lint Gates)
-        
         working-directory: ./queueless
         run: flutter analyze
 
       - name: Run Flutter Tests
         working-directory: ./queueless
-        run: flutter test
+        run: flutter test --coverage

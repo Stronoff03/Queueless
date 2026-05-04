@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
@@ -844,18 +844,30 @@ app.get('/join/:businessId', async (req, res) => {
 });
 
 // Global Error Handler
-// Global Error Handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong on the server' });
 });
 
-// Default 404
-app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+// Serve Flutter Web from /public directory
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Default 404 for API, but return index.html for other routes to support Flutter web routing
+app.use((req, res, next) => {
+  if (req.url.startsWith('/api/')) {
+    return res.status(404).json({ error: 'Route not found' });
+  }
+  res.sendFile(path.join(__dirname, 'public', 'index.html'), err => {
+    if (err) res.status(404).send('Not found');
+  });
 });
 
-server.listen(PORT, '0.0.0.0', async () => {
-  console.log(`🚀 Queueless Server running on http://0.0.0.0:${PORT} (accessible on LAN)`);
-  await testConnection();
-});
+if (require.main === module) {
+  server.listen(PORT, '0.0.0.0', async () => {
+    console.log(`🚀 Queueless Server running on http://0.0.0.0:${PORT} (accessible on LAN)`);
+    await testConnection();
+  });
+}
+
+module.exports = { app, server };
