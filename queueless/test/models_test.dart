@@ -91,7 +91,7 @@ void main() {
       final model = AppointmentModel.fromJson(json);
       expect(model.id, 'a1');
       expect(model.serviceName, 'Haircut');
-      expect(model.status, 'confirmed');
+      expect(model.status.name, 'confirmed');
     });
 
     test('ProductModel deserializes correctly and preserves price value', () {
@@ -99,8 +99,10 @@ void main() {
         'id': 'p1',
         'business_id': 'b1',
         'name': 'Espresso',
+        'description': 'A strong coffee shot',
         'price': 10.5,
         'is_available': 1,
+        'is_off_sale': 0,
       };
       final model = ProductModel.fromJson(json);
       expect(model.id, 'p1');
