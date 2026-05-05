@@ -11,6 +11,7 @@ import '../../../providers/auth_provider.dart';
 import '../../../providers/appointment_provider.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../providers/business_provider.dart';
+import '../../../core/localization/app_localizations.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/eta_utils.dart';
 import '../../../core/utils/page_transitions.dart';
@@ -628,7 +629,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
             children: [
               _buildStatColumn('In Queue', waitingCount.toString(), Icons.people_outline),
               Container(width: 1, height: 50, color: AppColors.divider),
-              _buildStatColumn('Wait Time', queue != null ? waitLabel : '-', Icons.schedule_rounded),
+              _buildStatColumn(AppLocalizations.estimatedWait, queue != null ? waitLabel : '-', Icons.schedule_rounded),
             ],
           ),
         );
@@ -670,11 +671,13 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
     return Column(
       children: [
         if (_selectedProductId == null && showQueue)
-        Row(
-          children: [
-            if (showQueue)
-              Expanded(
-                child: Consumer2<QueueProvider, AuthProvider>(
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          child: Row(
+            children: [
+              if (showQueue)
+                Consumer2<QueueProvider, AuthProvider>(
                   builder: (context, qProvider, auth, _) {
                     final isPaused = qProvider.currentQueue?.isPaused ?? false;
                     final entry = qProvider.currentQueue?.entries.firstWhere(
@@ -707,7 +710,7 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
                             foregroundColor: AppColors.error,
                           ),
                           icon: const Icon(Icons.logout_rounded, size: 18),
-                          label: const Text('Leave Queue'),
+                          label: const Text(AppLocalizations.leaveQueue),
                         ),
                       );
                     }
@@ -743,13 +746,13 @@ class _BusinessDetailScreenState extends State<BusinessDetailScreen> with Ticker
                           shadowColor: Colors.transparent,
                         ),
                         icon: Icon(isPaused ? Icons.pause_circle_filled_rounded : Icons.queue_rounded, size: 18),
-                        label: Text(isPaused ? 'Queue Paused' : 'Join Queue'),
+                        label: Text(isPaused ? AppLocalizations.queuePaused : AppLocalizations.joinQueue),
                       ),
                     );
                   },
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ],
     );

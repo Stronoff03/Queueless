@@ -1,12 +1,11 @@
-﻿import 'dart:async';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/queue_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/business_provider.dart';
 import '../../core/constants/app_colors.dart';
-import '../../core/utils/page_transitions.dart';
-import '../../models/queue_model.dart';
+import '../../core/localization/app_localizations.dart';
 import 'business_detail_screen.dart';
 
 class CustomerQueueListScreen extends StatefulWidget {
@@ -151,7 +150,7 @@ class _CustomerQueueListScreenState extends State<CustomerQueueListScreen> {
                       await qProvider.cancelSpecificQueue(entry.id);
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Left queue successfully')),
+                          SnackBar(content: Text(AppLocalizations.leaveQueue)),
                         );
                       }
                     }
@@ -199,9 +198,9 @@ class _CustomerQueueListScreenState extends State<CustomerQueueListScreen> {
               ),
             ),
             const SizedBox(height: 28),
-            const Text('No active queues', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700)),
+            const Text(AppLocalizations.noActiveQueues, style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700)),
             const SizedBox(height: 8),
-            const Text('Join from a business page', style: TextStyle(color: AppColors.textHint, fontSize: 14)),
+            const Text(AppLocalizations.joinFromBusinessPage, style: TextStyle(color: AppColors.textHint, fontSize: 14)),
             const SizedBox(height: 32),
             Container(
               decoration: BoxDecoration(
@@ -219,7 +218,7 @@ class _CustomerQueueListScreenState extends State<CustomerQueueListScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                 ),
                 icon: const Icon(Icons.explore_rounded, size: 20),
-                label: const Text('Explore Businesses', style: TextStyle(fontWeight: FontWeight.w600)),
+                label: const Text(AppLocalizations.exploreBusinesses, style: TextStyle(fontWeight: FontWeight.w600)),
               ),
             ),
           ],
@@ -243,14 +242,14 @@ class _CustomerQueueListScreenState extends State<CustomerQueueListScreen> {
               child: const Icon(Icons.warning_amber_rounded, color: AppColors.warning, size: 22),
             ),
             const SizedBox(width: 12),
-            const Text('Leave Queue?'),
+            const Text(AppLocalizations.leaveQueueQuestion),
           ],
         ),
-        content: const Text('You will lose your current position.'),
+        content: const Text(AppLocalizations.losePositionWarning),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Keep My Spot'),
+            child: const Text(AppLocalizations.keepMySpot),
           ),
           Container(
             decoration: BoxDecoration(
@@ -260,7 +259,7 @@ class _CustomerQueueListScreenState extends State<CustomerQueueListScreen> {
             child: ElevatedButton(
               onPressed: () => Navigator.pop(context, true),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent),
-              child: const Text('Leave Queue'),
+              child: const Text(AppLocalizations.leaveQueue),
             ),
           ),
         ],
@@ -392,7 +391,7 @@ class _QueueEntryCardState extends State<_QueueEntryCard> with SingleTickerProvi
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              widget.isServing ? 'YOUR TURN NOW!' : 'Queue #${widget.entry.position}',
+                              widget.isServing ? AppLocalizations.yourTurnNow : AppLocalizations.queuePositionLabel(widget.entry.position),
                               style: TextStyle(
                                 color: widget.isServing ? Colors.white : AppColors.primaryLight,
                                 fontWeight: FontWeight.bold,
@@ -424,14 +423,14 @@ class _QueueEntryCardState extends State<_QueueEntryCard> with SingleTickerProvi
                       children: [
                         Icon(Icons.people_outline_rounded, size: 16, color: AppColors.textHint),
                         const SizedBox(width: 6),
-                        Text('$peopleAhead ahead', style: const TextStyle(color: AppColors.textHint, fontSize: 13)),
+                        Text(AppLocalizations.peopleAheadLabel(peopleAhead), style: const TextStyle(color: AppColors.textHint, fontSize: 13)),
                       ],
                     ),
                     Row(
                       children: [
                         Icon(Icons.timer_outlined, size: 16, color: AppColors.primaryLight),
                         const SizedBox(width: 6),
-                        Text('Est: $waitTime', style: const TextStyle(color: AppColors.primaryLight, fontSize: 13, fontWeight: FontWeight.w600)),
+                        Text(AppLocalizations.estWaitLabel(waitTime), style: const TextStyle(color: AppColors.primaryLight, fontSize: 13, fontWeight: FontWeight.w600)),
                       ],
                     ),
                   ],
@@ -456,7 +455,7 @@ class _QueueEntryCardState extends State<_QueueEntryCard> with SingleTickerProvi
                           const Icon(Icons.timelapse_rounded, size: 16, color: AppColors.primaryLight),
                           const SizedBox(width: 6),
                           Text(
-                            'Service: ${widget.entry.durationLabel}',
+                            AppLocalizations.serviceLabel(widget.entry.durationLabel),
                             style: const TextStyle(color: AppColors.primaryLight, fontSize: 13, fontWeight: FontWeight.w600),
                           ),
                         ],
@@ -504,7 +503,7 @@ class _QueueEntryCardState extends State<_QueueEntryCard> with SingleTickerProvi
                 TextButton.icon(
                   onPressed: widget.onViewShop,
                   icon: const Icon(Icons.storefront_outlined, size: 16),
-                  label: const Text('Shop', style: TextStyle(fontSize: 13)),
+                  label: const Text(AppLocalizations.shop, style: TextStyle(fontSize: 13)),
                   style: TextButton.styleFrom(foregroundColor: AppColors.primaryLight),
                 ),
                 const Spacer(),
@@ -528,7 +527,7 @@ class _QueueEntryCardState extends State<_QueueEntryCard> with SingleTickerProvi
                           children: [
                             Icon(Icons.close_rounded, size: 15, color: AppColors.error),
                             SizedBox(width: 5),
-                            Text('Leave', style: TextStyle(color: AppColors.error, fontWeight: FontWeight.w600, fontSize: 13)),
+                            Text(AppLocalizations.leave, style: TextStyle(color: AppColors.error, fontWeight: FontWeight.w600, fontSize: 13)),
                           ],
                         ),
                       ),

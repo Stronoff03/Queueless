@@ -1,4 +1,4 @@
-class AppStrings {
+class AppLocalizations {
   // App
   static const String appName = 'QueueLess';
   static const String appTagline = 'Skip the line, save your time';
@@ -31,13 +31,24 @@ class AppStrings {
   static const String profile = 'Profile';
   static const String joinQueue = 'Join Queue';
   static const String leaveQueue = 'Leave Queue';
+  static const String leaveQueueQuestion = 'Leave Queue?';
   static const String bookAppointment = 'Book Appointment';
   static const String viewMenu = 'View Menu';
   static const String queuePosition = 'Your Position';
   static const String estimatedWait = 'Estimated Wait';
+  static const String estimatedWaitTime = 'Estimated Wait Time';
   static const String searchBusiness = 'Search businesses...';
   static const String noBusiness = 'No businesses found';
   static const String noActiveQueue = 'No active queue';
+  static const String noActiveQueues = 'No active queues';
+  static const String joinFromBusinessPage = 'Join from a business page';
+  static const String exploreBusinesses = 'Explore Businesses';
+  static const String losePositionWarning = 'You will lose your current position.';
+  static const String keepMySpot = 'Keep My Spot';
+  static const String yourTurnNow = 'YOUR TURN NOW!';
+  static const String shop = 'Shop';
+  static const String leave = 'Leave';
+  static const String queuePaused = 'Queue Paused';
 
   // Business
   static const String dashboard = 'Dashboard';
@@ -71,6 +82,34 @@ class AppStrings {
   static const String clinic = 'Clinic';
   static const String other = 'Other';
 
+  // Reviews & Rating
+  static const String thanksForReview = 'Thanks for your review!';
+  static const String rateThisBusiness = 'Rate this Business';
+  static const String submitReview = 'Submit Review';
+  static const String noReviewsYet = 'No reviews yet';
+  static String reviewsCount(int count) => 'Reviews ($count)';
+  static String reviewsCountText(int count) => '$count reviews';
+  static String thanksForRating(int stars) => 'Thanks for rating $stars stars!';
+
+  // Products
+  static const String noProducts = 'No products available right now.';
+  static const String replaceCartItems = 'Replace Cart Items?';
+  static const String cartConflictMsg = 'Your cart already contains items from another business. Those items will be removed if you continue.';
+  static const String clearCart = 'Clear Cart';
+  static const String prevItemsRemoved = 'Previous cart items were removed.';
+
+  // Booking
+  static const String bookThisService = 'Do you want to book this service?';
+  static const String yesSelectTime = 'Yes, Select Time';
+  static const String selectDate = 'Select Date';
+  static const String availableSlots = 'Available Slots';
+  static const String noSlotsForDay = 'No slots for this day';
+  static const String tryAnotherDate = 'Try another date';
+  static const String discountCoupon = 'Discount Coupon (optional)';
+  static const String enterCouponCode = 'Enter coupon code';
+  static const String apply = 'Apply';
+  static const String confirmBooking = 'Confirm Booking';
+
   // Common
   static const String save = 'Save';
   static const String cancel = 'Cancel';
@@ -86,4 +125,10 @@ class AppStrings {
   static const String minutes = 'min';
   static const String people = 'people';
   static const String inQueue = 'in queue';
+
+  // Parameterized
+  static String peopleAheadLabel(int count) => '$count ahead';
+  static String estWaitLabel(String waitTime) => 'Est: $waitTime';
+  static String queuePositionLabel(int position) => 'Queue #$position';
+  static String serviceLabel(String duration) => 'Service: $duration';
 }
