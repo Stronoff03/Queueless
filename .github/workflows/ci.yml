@@ -12,32 +12,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Initialize Node.js Environment
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: '20'
+
       - name: Resolve Backend Dependencies
         working-directory: ./backend
         run: npm install
+
       - name: Execute Core Logic Unit Tests (Jest)
         working-directory: ./backend
-        run: npm test
+        run: npx jest tests/ --coverage --forceExit
 
   frontend-quality-verification:
     name: Frontend Quality & UI/UX Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Initialize Flutter Environment
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          cache: true
+
       - name: Resolve Frontend Packages
         working-directory: ./queueless
         run: flutter pub get
+
       - name: Static Analysis & Linting (Flutter Analyzer)
         working-directory: ./queueless
-        run: flutter analyze --no-fatal-infos || true
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
       - name: Execute Widget & Model Tests
         working-directory: ./queueless
-        run: flutter test
+        run: flutter test test/models_test.dart test/widget_test.dart
