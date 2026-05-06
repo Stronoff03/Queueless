@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 3000;
 
 // Socket.io
 const io = new Server(server, {
-  cors: { origin: '*', methods: ['GET', 'POST'] }
+  cors: { origin: true, methods: ['GET', 'POST'], credentials: true }
 });
 
 // Make io accessible from routes
@@ -62,7 +62,10 @@ io.on('connection', (socket) => {
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 app.use(express.json());
 
 // Request logger
@@ -844,26 +847,18 @@ app.get('/join/:businessId', async (req, res) => {
 });
 
 // Global Error Handler
+// Global Error Handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong on the server' });
 });
 
-// Serve Flutter Web from /public directory
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Default 404 for API, but return index.html for other routes to support Flutter web routing
-app.use((req, res, next) => {
-  if (req.url.startsWith('/api/')) {
-    return res.status(404).json({ error: 'Route not found' });
-  }
-  res.sendFile(path.join(__dirname, 'public', 'index.html'), err => {
-    if (err) res.status(404).send('Not found');
-  });
+// Default 404
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
 });
 
-if (require.main === module) {
+if (process.env.NODE_ENV !== 'test') {
   server.listen(PORT, '0.0.0.0', async () => {
     console.log(`🚀 Queueless Server running on http://0.0.0.0:${PORT} (accessible on LAN)`);
     await testConnection();
