@@ -1,4 +1,4 @@
-name: Queueless Master Quality Gate
+name: Queueless CI/CD Test
 
 on:
   push:
