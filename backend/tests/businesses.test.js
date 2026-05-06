@@ -15,10 +15,11 @@ jest.mock('jsonwebtoken', () => ({
   verify: jest.fn()
 }));
 
+beforeEach(() => {
+  jest.resetAllMocks();
+});
+
 describe('Business Routes', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
 
   describe('GET /api/businesses', () => {
     it('should return a list of active businesses', async () => {
