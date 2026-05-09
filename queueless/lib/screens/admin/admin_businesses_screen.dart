@@ -371,10 +371,12 @@ class _AdminBusinessesScreenState extends State<AdminBusinessesScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              child: Row(
+                children: [
+                  OutlinedButton.icon(
                     onPressed: id.isEmpty ? null : () => _openBusinessDetail(business),
                     icon: const Icon(Icons.settings_suggest_rounded, size: 18),
                     label: const Text('Manage'),
@@ -383,27 +385,27 @@ class _AdminBusinessesScreenState extends State<AdminBusinessesScreen> {
                       side: BorderSide(color: theme.primaryColor.withValues(alpha: 0.35)),
                     ),
                   ),
-                ),
-                if (status == 'pending') ...[
-                  const SizedBox(width: 8),
-                  TextButton.icon(
-                    onPressed: () => _reject(id),
-                    icon: const Icon(Icons.close_rounded, size: 16, color: AppColors.error),
-                    label: const Text('Reject', style: TextStyle(color: AppColors.error)),
-                  ),
-                  const SizedBox(width: 8),
-                  ElevatedButton.icon(
-                    onPressed: () => _approve(id),
-                    icon: const Icon(Icons.check_rounded, size: 16),
-                    label: const Text('Approve'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.success,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  if (status == 'pending') ...[
+                    const SizedBox(width: 8),
+                    TextButton.icon(
+                      onPressed: () => _reject(id),
+                      icon: const Icon(Icons.close_rounded, size: 16, color: AppColors.error),
+                      label: const Text('Reject', style: TextStyle(color: AppColors.error)),
                     ),
-                  ),
+                    const SizedBox(width: 8),
+                    ElevatedButton.icon(
+                      onPressed: () => _approve(id),
+                      icon: const Icon(Icons.check_rounded, size: 16),
+                      label: const Text('Approve'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.success,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      ),
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ],
         ),
@@ -1060,10 +1062,12 @@ class _AdminBusinessDetailSheetState extends State<_AdminBusinessDetailSheet> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Column(
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            physics: const BouncingScrollPhysics(),
+                                            child: Row(
+                                              children: [
+                                                Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Text(product['name']?.toString() ?? 'Unnamed item', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
@@ -1071,13 +1075,14 @@ class _AdminBusinessDetailSheetState extends State<_AdminBusinessDetailSheet> {
                                                     Text('\$${_asDouble(product['price']).toStringAsFixed(2)}', style: const TextStyle(color: AppColors.secondary, fontWeight: FontWeight.w700)),
                                                   ],
                                                 ),
-                                              ),
-                                              OutlinedButton.icon(
-                                                onPressed: () => _editProduct(product),
-                                                icon: const Icon(Icons.edit_rounded, size: 16),
-                                                label: const Text('Edit'),
-                                              ),
-                                            ],
+                                                const SizedBox(width: 12),
+                                                OutlinedButton.icon(
+                                                  onPressed: () => _editProduct(product),
+                                                  icon: const Icon(Icons.edit_rounded, size: 16),
+                                                  label: const Text('Edit'),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                           const SizedBox(height: 10),
                                           Wrap(
@@ -1298,10 +1303,12 @@ class _AdminBusinessDetailSheetState extends State<_AdminBusinessDetailSheet> {
                                             borderRadius: BorderRadius.circular(14),
                                             border: Border.all(color: AppColors.glassBorder, width: 0.5),
                                           ),
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Column(
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            physics: const BouncingScrollPhysics(),
+                                            child: Row(
+                                              children: [
+                                                Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Text(timeLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
@@ -1309,28 +1316,29 @@ class _AdminBusinessDetailSheetState extends State<_AdminBusinessDetailSheet> {
                                                     Text(dateLabel, style: const TextStyle(fontSize: 12, color: AppColors.textHint)),
                                                   ],
                                                 ),
-                                              ),
-                                              if (isBooked)
-                                                Container(
-                                                  margin: const EdgeInsets.only(right: 8),
-                                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.warning.withValues(alpha: 0.12),
-                                                    borderRadius: BorderRadius.circular(10),
+                                                const SizedBox(width: 12),
+                                                if (isBooked)
+                                                  Container(
+                                                    margin: const EdgeInsets.only(right: 8),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.warning.withValues(alpha: 0.12),
+                                                      borderRadius: BorderRadius.circular(10),
+                                                    ),
+                                                    child: const Text('BOOKED', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.warning)),
                                                   ),
-                                                  child: const Text('BOOKED', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.warning)),
+                                                IconButton(
+                                                  tooltip: 'Edit slot',
+                                                  onPressed: isBooked ? null : () => _showSlotEditor(slot: slot),
+                                                  icon: const Icon(Icons.edit_rounded),
                                                 ),
-                                              IconButton(
-                                                tooltip: 'Edit slot',
-                                                onPressed: isBooked ? null : () => _showSlotEditor(slot: slot),
-                                                icon: const Icon(Icons.edit_rounded),
-                                              ),
-                                              IconButton(
-                                                tooltip: 'Delete slot',
-                                                onPressed: isBooked ? null : () => _deleteSlot(slot),
-                                                icon: const Icon(Icons.delete_outline_rounded),
-                                              ),
-                                            ],
+                                                IconButton(
+                                                  tooltip: 'Delete slot',
+                                                  onPressed: isBooked ? null : () => _deleteSlot(slot),
+                                                  icon: const Icon(Icons.delete_outline_rounded),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         );
                                       }).toList(),
